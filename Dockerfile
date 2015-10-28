@@ -31,7 +31,7 @@ ENV ZEPPELIN_HOME /opt/apache-zeppelin
 ENV ZEPPELIN_PORT 8888
 ENV PATH          $ZEPPELIN_HOME/bin:$PATH
 
-# Build and Install Zeppelin (this is only one fat command to reduce image size) 
+# Build and Install Zeppelin (this is only one fat command to reduce container size) 
 RUN wget http://mirror.netcologne.de/apache.org/maven/maven-3/3.3.3/binaries/apache-maven-3.3.3-bin.tar.gz -O /tmp/apache-maven-3.3.3-bin.tar.gz && \
     tar -xzf /tmp/apache-maven-3.3.3-bin.tar.gz -C /tmp && \
     git clone https://github.com/apache/incubator-zeppelin /tmp/apache-zeppelin && \
@@ -39,7 +39,7 @@ RUN wget http://mirror.netcologne.de/apache.org/maven/maven-3/3.3.3/binaries/apa
     /tmp/apache-maven-3.3.3/bin/mvn clean package -Pspark-1.5 -Dhadoop.version=2.6.0 -Phadoop-2.6 -DskipTests -P build-distr && \
     mv /tmp/apache-zeppelin/zeppelin-distribution/target/zeppelin-0.6.0-incubating-SNAPSHOT/zeppelin-0.6.0-incubating-SNAPSHOT /opt && \
     ln -s /opt/zeppelin-0.6.0-incubating-SNAPSHOT $ZEPPELIN_HOME && \
-    rm -fr /tmp/apache* ~/.m2
+    rm -fr /tmp/apache* ~/.m2 ~/.node-gyp ~/.npm
 
 # Ports for Zeppelin UI and websocket connection
 EXPOSE 8888 8889
