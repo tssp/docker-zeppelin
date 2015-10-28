@@ -26,3 +26,6 @@ zeppelin:
     MASTER: spark://master-node:7077
   links:
     - master-node
+  ports:
+    - 8888:8888
+    - 8889:8889
