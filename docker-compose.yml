@@ -1,0 +1,28 @@
+master-node:
+  image: tssp/apache-spark
+  hostname: master-node
+  command: spark-class org.apache.spark.deploy.master.Master --host master-node
+  ports:
+    - 4040:4040
+    - 6066:6066
+    - 7077:7077
+    - 8080:8080
+
+worker-node:
+  image: tssp/apache-spark
+  hostname: worker-node
+  command: spark-class org.apache.spark.deploy.worker.Worker spark://master-node:7077
+  environment:
+    SPARK_WORKER_CORES: 1
+    SPARK_WORKER_MEMORY: 1g
+    SPARK_WORKER_WEBUI_PORT: 8081
+  links:
+    - master-node
+
+zeppelin:
+  image: tssp/apache-zeppelin
+  hostname: zeppelin
+  environment:
+    MASTER: spark://master-node:7077
+  links:
+    - master-node
