@@ -14,5 +14,5 @@ Follow the instructions on https://docs.docker.com/installation and https://docs
 
 ## Build Docker Container
 
-The container can be build by executing `docker build -t tssp/apache-zeppelin .`.
+The container can be built by executing `docker build -t tssp/apache-zeppelin .`.
 
