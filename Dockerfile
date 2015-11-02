@@ -42,7 +42,7 @@ RUN wget http://mirror.netcologne.de/apache.org/maven/maven-3/3.3.3/binaries/apa
     rm -fr /tmp/apache* ~/.m2 ~/.node-gyp ~/.npm
 
 # Ports for Zeppelin UI and websocket connection
-EXPOSE 8888 8889 4444
+EXPOSE 8888 8889 4040
 
 # Default mode: Execute Zeppelin UI
 CMD ["zeppelin.sh"]

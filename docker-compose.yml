@@ -3,7 +3,6 @@ master-node:
   hostname: master-node
   command: spark-class org.apache.spark.deploy.master.Master --host master-node
   ports:
-    - 4040:4040
     - 6066:6066
     - 7077:7077
     - 8080:8080
@@ -27,6 +26,6 @@ zeppelin:
   links:
     - master-node
   ports:
-    - 4040:4444
+    - 4040:4040
     - 8888:8888
     - 8889:8889
