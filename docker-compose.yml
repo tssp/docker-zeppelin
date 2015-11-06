@@ -1,5 +1,5 @@
 master-node:
-  image: tssp/apache-spark
+  image: tssp/apache-spark:v1.5.1-2.6
   hostname: master-node
   command: spark-class org.apache.spark.deploy.master.Master --host master-node
   ports:
@@ -8,7 +8,7 @@ master-node:
     - 8080:8080
 
 worker-node:
-  image: tssp/apache-spark
+  image: tssp/apache-spark:v1.5.1-2.6
   hostname: worker-node
   command: spark-class org.apache.spark.deploy.worker.Worker spark://master-node:7077
   environment:
