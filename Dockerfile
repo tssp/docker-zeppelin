@@ -5,7 +5,7 @@
 #  * Standalone: docker pull tssp/apache-zeppelin
 #                docker run -d tssp/apache-zeppelin
 #
-#  * Cluster:    docker-compose up 
+#  * Cluster:    docker-compose up
 #
 
 FROM openjdk:8
@@ -22,14 +22,16 @@ MAINTAINER tssp <tim@coding-me.com>
 ENV ZEPPELIN_HOME /opt/apache-zeppelin
 ENV PATH          $ZEPPELIN_HOME/bin:$PATH
 
-RUN  curl -L -O "http://ftp.halifax.rwth-aachen.de/apache/zeppelin/zeppelin-0.6.2/zeppelin-0.6.2-bin-all.tgz" && \
-    tar -xzf zeppelin-0.6.2-bin-all.tgz -C /opt && \
-    ln -s /opt/zeppelin-0.6.2-bin-all $ZEPPELIN_HOME && \
-    rm -fr zeppelin-0.6.2-bin-all.tgz
+RUN  curl -L -O "http://ftp.halifax.rwth-aachen.de/apache/zeppelin/zeppelin-0.7.0/zeppelin-0.7.0-bin-all.tgz" && \
+    tar -xzf zeppelin-0.7.0-bin-all.tgz -C /opt && \
+    ln -s /opt/zeppelin-0.7.0-bin-all $ZEPPELIN_HOME && \
+    rm -fr zeppelin-0.7.0-bin-all.tgz
 
+COPY startup.sh /usr/bin/startup.sh
+RUN chmod 755 /usr/bin/startup.sh
 
 # Default ports for Zeppelin UI and websocket connection
 EXPOSE 8080 8081
 
-# Default mode: Execute Zeppelin UI
-CMD ["zeppelin.sh"]
+# Default mode: Execute Zeppelin Daemon
+CMD ["startup.sh"]
